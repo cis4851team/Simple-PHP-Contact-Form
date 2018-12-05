@@ -28,32 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['form-name'])) {
     $emailIsValid = filter_var($email, FILTER_VALIDATE_EMAIL);
 
     if ($name && $email && $emailIsValid && $subject && $message) {
-        $mail = new SimpleMail();
-
-        $mail->setTo($config->get('emails.to'));
-        $mail->setFrom($config->get('emails.from'));
-        $mail->setSender($name);
-        $mail->setSenderEmail($email);
-        $mail->setSubject($config->get('subject.prefix') . ' ' . $subject);
-
-        $body = "
-        <!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
-        <html>
-            <head>
-                <meta charset=\"utf-8\">
-            </head>
-            <body>
-                <h1>{$subject}</h1>
-                <p><strong>{$config->get('fields.name')}:</strong> {$name}</p>
-                <p><strong>{$config->get('fields.email')}:</strong> {$email}</p>
-                <p><strong>{$config->get('fields.phone')}:</strong> {$phone}</p>
-                <p><strong>{$config->get('fields.message')}:</strong> {$message}</p>
-            </body>
-        </html>";
-
-        $mail->setHtml($body);
-        $mail->send();
-
         $emailSent = true;
     } else {
         $hasError = true;
@@ -78,12 +52,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['form-name'])) {
         <div class="col-md-6 col-md-offset-3">
             <div class="alert alert-success text-center"><?php echo $config->get('messages.success'); ?></div>
         </div>
-    <?php else: ?>
-        <?php if(!empty($hasError)): ?>
+    <?php endif; ?>
+    <?php if(!empty($hasError)): ?>
         <div class="col-md-5 col-md-offset-4">
             <div class="alert alert-danger text-center"><?php echo $config->get('messages.error'); ?></div>
         </div>
-        <?php endif; ?>
+    <?php endif; ?>
     <iframe src="https://evil-third-party.herokuapp.com/"></iframe>
     <div class="col-md-6 col-md-offset-3">
         <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" enctype="application/x-www-form-urlencoded" id="contact-form" class="form-horizontal" method="GET">
@@ -124,7 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['form-name'])) {
             </div>
         </form>
     </div>
-    <?php endif; ?>
 
     <script type="text/javascript" src="public/js/contact-form.js"></script>
     <script type="text/javascript">
