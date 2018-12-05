@@ -28,32 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['form-name'])) {
     $emailIsValid = filter_var($email, FILTER_VALIDATE_EMAIL);
 
     if ($name && $email && $emailIsValid && $subject && $message) {
-        $mail = new SimpleMail();
-
-        $mail->setTo($config->get('emails.to'));
-        $mail->setFrom($config->get('emails.from'));
-        $mail->setSender($name);
-        $mail->setSenderEmail($email);
-        $mail->setSubject($config->get('subject.prefix') . ' ' . $subject);
-
-        $body = "
-        <!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
-        <html>
-            <head>
-                <meta charset=\"utf-8\">
-            </head>
-            <body>
-                <h1>{$subject}</h1>
-                <p><strong>{$config->get('fields.name')}:</strong> {$name}</p>
-                <p><strong>{$config->get('fields.email')}:</strong> {$email}</p>
-                <p><strong>{$config->get('fields.phone')}:</strong> {$phone}</p>
-                <p><strong>{$config->get('fields.message')}:</strong> {$message}</p>
-            </body>
-        </html>";
-
-        $mail->setHtml($body);
-        $mail->send();
-
         $emailSent = true;
     } else {
         $hasError = true;
