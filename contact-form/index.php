@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['form-name'])) {
 ?><!DOCTYPE html>
 <html>
 <head>
-    <title>Simple PHP Contact Form</title>
+    <title>Contact Us</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
